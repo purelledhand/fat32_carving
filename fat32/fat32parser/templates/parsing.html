@@ -1,0 +1,328 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>FAT32 Parser</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+
+    <!-- Animation library for notifications   -->
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet"/>
+
+    <!--  Paper Dashboard core CSS    -->
+    <link href="{% static 'css/paper-dashboard.css' %}" rel="stylesheet"/>
+
+
+    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <link href="{% static 'css/demo.css' %}" rel="stylesheet" />
+
+    <!--  Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/themify-icons.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+    <!--
+        Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+        Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+    -->
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    [BOB6] FAT32 Carving
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="parsing.html">
+                        <i class="ti-stack-overflow"></i>
+                        <p>Carving</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">FAT32 - D:\ Drive Carving</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    
+
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>Bytes per Sector</p>
+                                            {{Bytes_per_Sec}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        parsing in Boot Record
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>Sectors per Cluster</p>
+                                            {{Sec_per_Clust}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        parsing in Boot Record
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>Cluster Size</p>
+                                            {{cluster_size}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        B/sec x Sec/clust
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>Reserved area</p>
+                                            {{reserve}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        parsing in Boot Record
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>FAT32 size</p>
+                                            {{fat32_size}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        parsing in Boot Record
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>FAT#1</p>
+                                            {{fat1}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        FAT#1 = reserved
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>FAT#2</p>
+                                            {{fat2}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        FAT#1 + FAT32 size
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="numbers">
+                                            <p>Root Directory</p>
+                                            {{rootdirectory}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <div class="stats">
+                                        FAT#2 + FAT32 size
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Carving List</h4>
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>ID</th>
+                                        <th>Unallocated cluster</th>
+                                        <th>File Type</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ num }}</td>
+                                            <td>{{ cluster }}</td>
+                                            <td>{{ type }}</td>
+                                        </tr>
+                                      
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                </nav>
+                <div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by SOHYE
+                </div>
+            </div>
+        </footer>
+
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="{% static 'js/jquery-1.10.2.js' %}" type="text/javascript"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="{% static 'js/bootstrap-checkbox-radio.js' %}"></script>
+
+	<!--  Charts Plugin -->
+	<script src="{% static 'js/chartist.min.js' %}"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="{% static 'js/bootstrap-notify.js' %}"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+    <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+	<script src="{% static 'js/paper-dashboard.js' %}"></script>
+
+	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+	<script src="{% static 'js/demo.js' %}"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+        	demo.initChartist();
+
+
+    	});
+	</script>
+
+</html>

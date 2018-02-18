@@ -1,0 +1,25 @@
+exe : 4D 5A 90 00
+avi : 52 49 46 46
+mp4 : 33 67 70 35
+jpg : FF D8 FF E0
+mp3 : 49 44 33 03
+ppt : 0F 00 E8 03
+png : 89 50 4E 47
+pdf : 25 50 44 46
+jpeg : FF D8 FF FE 00
+gif : 47 49 46 38 
+avi : 52 49 46 46 6A 42 01 00
+bak : 5B 33 2F 31 32 2F 32 30
+bat : 52 45 4D 20 44 75 6D 6D
+bin : FF 53 43 43 FF 4D 41 50
+dll : 4D 5A 90 00 03 00 00 00
+db  : D0 CF 11 E0 A1 B1 1A E1
+doc : D0 CF 11 E0 A1 B1 1A E1
+hwp : D0 CF 11 E0 A1 B1 1A E1
+xls : D0 CF 11 E0 A1 B1 1A E1
+htm : 3C 21 44 4F 43 54 59 50
+xml : 09 04 06 00 00 00 10 00
+zip : 50 4B 4C 49 54 45
+docx : 50 4B 03 04 14 00 06 00
+pptx : 50 4B 03 04 14 00 06 00
+xlsx : 50 4B 03 04 14 00 06 00
